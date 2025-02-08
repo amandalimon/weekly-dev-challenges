@@ -1,10 +1,6 @@
-import { ComponentType } from "react";
 import dynamic from "next/dynamic";
 
-type ChallengeComponent = ComponentType<{} | null>;
-type ChallengeComponents = Record<string, ChallengeComponent>;
-
-const challengeComponents: ChallengeComponents = {
+const challengeComponents: Record<string, React.ComponentType> = {
   "week-1": dynamic(() => import("@/components/challenges/Week1")),
   "week-2": dynamic(() => import("@/components/challenges/Week2")),
   "week-3": dynamic(() => import("@/components/challenges/Week3")),
