@@ -1,7 +1,7 @@
 import { ComponentType } from "react";
 import dynamic from "next/dynamic";
 
-type ChallengeComponent = ComponentType<{}>;
+type ChallengeComponent = ComponentType<{} | null>;
 type ChallengeComponents = Record<string, ChallengeComponent>;
 
 const challengeComponents: ChallengeComponents = {
