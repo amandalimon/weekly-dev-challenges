@@ -13,8 +13,12 @@ const challengeComponents: Record<string, React.ComponentType> = {
   "week-10": dynamic(() => import("@/components/challenges/Week10")),
 };
 
-export default function WeekPage({ params }: { params: { week: string } }) {
-  const { week } = params;
+export default async function WeekPage({
+  params,
+}: {
+  params: Promise<{ week: string }>;
+}) {
+  const { week } = await params;
 
   const ChallengeComponent = challengeComponents[week];
 
