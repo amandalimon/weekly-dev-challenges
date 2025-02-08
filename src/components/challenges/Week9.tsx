@@ -11,7 +11,7 @@ const getPokemon = async () => {
     const pokemonList = data.results;
 
     const pokemonListData = await Promise.all(
-      pokemonList.map(async (pokemon) => {
+      pokemonList.map(async (pokemon: { url: string }) => {
         const pokemonUrl = pokemon.url;
         const pokemonDataRes = await fetch(pokemonUrl);
         if (!pokemonDataRes.ok)
@@ -28,13 +28,28 @@ const getPokemon = async () => {
   }
 };
 
+type pokemon = {
+  id: number;
+  front_default: string;
+}[];
+
 export default function Home() {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState<pokemon>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getPokemon();
-      setPokemons(data);
+      try {
+        const data = await getPokemon();
+
+        const formattedData = data.map((pokemon) => ({
+          id: pokemon.id,
+          front_default: pokemon.sprites.front_default,
+        }));
+
+        setPokemons(formattedData);
+      } catch (error) {
+        console.error("Error fetching Pokémon:", error);
+      }
     };
 
     fetchData();
@@ -47,8 +62,8 @@ export default function Home() {
         {pokemons.map((pokemon) => (
           <LazyImage
             key={pokemon.id}
-            src={pokemon?.sprites?.back_default}
-            className="w-48 h-48 mb-4 rounded-md"
+            src={pokemon?.front_default}
+            className="w-48 h-48 mb-4 rounded-full"
           />
         ))}
       </div>
