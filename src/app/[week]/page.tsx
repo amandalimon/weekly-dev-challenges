@@ -18,7 +18,7 @@ export default async function WeekPage({
 }: {
   params: { week: string };
 }) {
-  const { week } = await params;
+  const { week } = params;
 
   const ChallengeComponent = challengeComponents[week];
 
