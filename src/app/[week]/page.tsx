@@ -5,6 +5,14 @@ type ChallengeComponent = ComponentType<{}>;
 type ChallengeComponents = Record<string, ChallengeComponent>;
 
 const challengeComponents: ChallengeComponents = {
+  "week-1": dynamic(() => import("@/components/challenges/Week1")),
+  "week-2": dynamic(() => import("@/components/challenges/Week2")),
+  "week-3": dynamic(() => import("@/components/challenges/Week3")),
+  "week-4": dynamic(() => import("@/components/challenges/Week4")),
+  "week-5": dynamic(() => import("@/components/challenges/Week5")),
+  "week-6": dynamic(() => import("@/components/challenges/Week6")),
+  "week-7": dynamic(() => import("@/components/challenges/Week7")),
+  "week-8": dynamic(() => import("@/components/challenges/Week8")),
   "week-9": dynamic(() => import("@/components/challenges/Week9")),
   "week-10": dynamic(() => import("@/components/challenges/Week10")),
 };
