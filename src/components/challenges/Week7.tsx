@@ -83,7 +83,7 @@ export default function Week10() {
             <NoteList notes={notes} onSelectNote={handleSelectNote} />
           ) : (
             <p className="text-gray-500 text-center">
-              You haven't added any notes yet.
+              You haven&apos;t added any notes yet.
             </p>
           )}
         </div>
