@@ -11,6 +11,7 @@ const challengeComponents: Record<string, React.ComponentType> = {
   "week-8": dynamic(() => import("@/components/challenges/Week8")),
   "week-9": dynamic(() => import("@/components/challenges/Week9")),
   "week-10": dynamic(() => import("@/components/challenges/Week10")),
+  "week-11": dynamic(() => import("@/components/challenges/Week11")),
 };
 
 export default async function WeekPage({

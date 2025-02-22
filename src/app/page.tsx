@@ -11,6 +11,7 @@ const weeks = [
   { id: "week-8", title: "Age Calculator" },
   { id: "week-9", title: "Pokémon Lazy Image Loader" },
   { id: "week-10", title: "..." },
+  { id: "week-11", title: "...." },
 ];
 
 export default function Home() {
