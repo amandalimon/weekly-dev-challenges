@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -23,13 +24,13 @@ export default function Week10() {
     setTasks([...tasks, taskWithId]);
   };
 
-  const handleSelectTask = (task: Task) => {
-    setSelectedTask(task);
-  };
+  // const handleSelectTask = (task: Task) => {
+  //   setSelectedTask(task);
+  // };
 
-  const handleOpenModal = () => {
-    setIsOpen(!isOpen);
-  };
+  // const handleOpenModal = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   return (
     <div className="bg-gray-900 w-2/3 h-[80vh] p-2">
@@ -51,9 +52,9 @@ export default function Week10() {
   );
 }
 
-interface TaskDetailsProps {
-  task: Task;
-}
+// interface TaskDetailsProps {
+//   task: Task;
+// }
 
 // const TaskDetails = ({task}: TaskDetailsProps) => {
 //   return ()
