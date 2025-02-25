@@ -74,27 +74,22 @@ export default function Week11() {
   };
 
   return (
-    <div className="flex justify-evenly items-start w-full p-12">
-      <div className="flex flex-col gap-4 w-96">
+    <div className="flex justify-between items-start gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-3/5">
         {products.map((product) => (
-          <div key={product.id} className="bg-gray-800 rounded-lg">
+          <div key={product.id} className="bg-gray-800 rounded-lg min-w-48">
             <p className="text-sm ml-2 text-gray-800 absolute">
               Mod: #00{product.id}
             </p>
-            <div className="w-full flex justify-center items-center bg-white rounded-t p-2">
-              <img
-                src={product.image}
-                alt={product.title}
-                width={100}
-                height={100}
-              />
+            <div className="flex justify-center items-center bg-white rounded-t p-2">
+              <img src={product.image} alt={product.title} className="h-48" />
             </div>
             <div className="p-4">
-              <p className="font-bold text-lg">{product.title}</p>
+              <p className="font-bold text-lg truncate">{product.title}</p>
               <p>$ {product.price}</p>
               <button
                 onClick={(e) => addProductsToCart(e, product)}
-                className="bg-gray-600 px-2 py-1 rounded mt-2"
+                className="bg-gray-600 px-2 py-1 rounded mt-2 w-full"
               >
                 Add to cart
               </button>
@@ -103,9 +98,9 @@ export default function Week11() {
         ))}
       </div>
 
-      <div className="flex flex-col gap-4 w-96">
+      <div className="flex flex-col gap-4 h-full w-72 bg-gray-900 p-4 fixed right-0 top-0 shadow-xl overflow-y-auto">
         {cartProducts.map((cartProduct) => (
-          <div key={cartProduct.id} className="bg-gray-800 rounded-lg">
+          <div key={cartProduct.id} className="bg-gray-800 rounded-lg min-w-48">
             <p className="text-sm text-gray-600 absolute ml-2">
               Mod: #00{cartProduct.id}
             </p>
@@ -113,8 +108,7 @@ export default function Week11() {
               <img
                 src={cartProduct.image}
                 alt={cartProduct.title}
-                width={100}
-                height={100}
+                className="h-48"
               />
             </div>
             <div className="p-4">
