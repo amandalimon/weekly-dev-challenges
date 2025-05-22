@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Card, Input, Button, ErrorMessage } from "@/components/ui";
 
 export default function Week8() {
   const [birthDate, setBirthDate] = useState<string>("");
@@ -10,64 +11,83 @@ export default function Week8() {
     days: number;
     minutes: number;
   } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!birthDate) return;
+  const calculateAge = () => {
+    if (isNaN(new Date(birthDate).getTime())) {
+      setError("Please enter a complete and valid birth date.");
+      return;
+    }
+    // birthDate = "1998-10-15"
+    const birth = new Date(birthDate); // convierte la fecha a la zona horaria local
+    // console.log (birth)
+    // Date Wed Oct 14 1998 19:00:00 GMT-0500 (Central Daylight Time)
+    // Los cálculos siguen siendo correctos porque los métodos getFullYear(), getMonth() y getDate() trabajan con en tiempo local
+    const now = new Date();
 
-    const calculateAge = () => {
-      const birth = new Date(birthDate);
-      const now = new Date();
+    let years = now.getFullYear() - birth.getFullYear(); // 27
+    let months = now.getMonth() - birth.getMonth(); // -8
+    let days = now.getDate() - birth.getDate(); // -10
 
-      let years = now.getFullYear() - birth.getFullYear();
-      let months = now.getMonth() - birth.getMonth();
-      let days = now.getDate() - birth.getDate();
+    if (days < 0) {
+      months -= 1; // -8 - 1 = -9
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); // obtener el número de días del mes anterior
+      // console.log (prevMonth)
+      // Date Fri Jan 31 2025 00:00:00 GMT-0600 (Central Standard Time)
+      days += prevMonth.getDate(); // -10 + 31 = 21
+    }
+    if (months < 0) {
+      years -= 1; // 27 - 1 = 26
+      months += 12; // -9 + 12 = 3
+    }
 
-      if (days < 0) {
-        months -= 1;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) {
-        years -= 1;
-        months += 12;
-      }
+    const minutes = Math.floor((now.getTime() - birth.getTime()) / 60000); // diferencia en milisegundos
+    // 1 minuto tiene 60,000 milisegundos
 
-      const minutes = Math.floor((now.getTime() - birth.getTime()) / 60000);
-
-      setAge({ years, months, days, minutes });
-    };
-
-    calculateAge();
-  }, [birthDate]);
+    setAge({ years, months, days, minutes });
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center h-auto w-96 max-w-md rounded-lg bg-gray-50 text-gray-800 p-6 shadow-lg">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-6">
-        Age Calculator
-      </h1>
-      <input
+    <Card
+      title="Week 8: Age Calculator"
+      description="Make a function that calculates the age of a person based on their birth date."
+    >
+      <Input
         type="date"
-        value={birthDate}        onChange={(e) => setBirthDate(e.target.value)}
-        className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6 w-full"
+        value={birthDate}
+        onChange={(e) => {
+          const value = e.target.value;
+          setBirthDate(value);
+          if (value && !isNaN(new Date(value).getTime())) {
+            setError(null);
+          }
+        }}
+        placeholder="Enter your birth date"
       />
+      <Button onClick={calculateAge}>Calculate</Button>
+
       {age && (
-        <div className="text-lg bg-white p-6 rounded-lg shadow-md w-full">
-          <p className="mb-2 text-gray-700">
-            <strong className="font-semibold">Age:</strong> {age.years} years
-          </p>
-          <p className="mb-2 text-gray-700">
-            <strong className="font-semibold">Months:</strong> {age.months}{" "}
-            months
-          </p>
-          <p className="mb-2 text-gray-700">
-            <strong className="font-semibold">Days:</strong> {age.days} days
-          </p>
-          <p className="mb-2 text-gray-700">
-            <strong className="font-semibold">Minutes:</strong>{" "}
-            {age.minutes.toLocaleString()}
-          </p>
+        <div className="bg-indigo-100 text-indigo-800 p-4 rounded-xl font-mono space-y-2 shadow-sm mt-4">
+          <p className="text-lg font-semibold">🎉 You are:</p>
+          <ul className="list-disc list-inside space-y-1 text-sm">
+            <li>
+              <span className="font-bold">{age.years}</span> years
+            </li>
+            <li>
+              <span className="font-bold">{age.months}</span> months
+            </li>
+            <li>
+              <span className="font-bold">{age.days}</span> days
+            </li>
+            <li>
+              <span className="font-bold">{age.minutes.toLocaleString()}</span>{" "}
+              minutes
+            </li>
+          </ul>
         </div>
       )}
-    </div>
+
+      {error && <ErrorMessage message={error} />}
+    </Card>
   );
 }
