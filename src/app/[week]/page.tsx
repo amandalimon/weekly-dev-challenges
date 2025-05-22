@@ -32,9 +32,5 @@ export default async function WeekPage({
     );
   }
 
-  return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-6">
-      <ChallengeComponent />
-    </main>
-  );
+  return <ChallengeComponent />;
 }

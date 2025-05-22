@@ -10,8 +10,8 @@ const weeks = [
   { id: "week-7", title: "Notes App" },
   { id: "week-8", title: "Age Calculator" },
   { id: "week-9", title: "Pokémon Lazy Image Loader" },
-  { id: "week-10", title: "..." },
-  { id: "week-11", title: "...." },
+  { id: "week-10", title: "Task Manager Board" },
+  { id: "week-11", title: "Simple E-commerce Store" },
 ];
 
 export default function Home() {
