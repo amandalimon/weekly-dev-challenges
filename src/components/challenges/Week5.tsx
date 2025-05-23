@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, Input, Button } from "@/components/ui";
 
 export default function Week5() {
@@ -109,13 +109,6 @@ export default function Week5() {
       setNum2((prev) => prev + ".");
     }
   };
-
-  // useEffect(() => {
-  //   console.log("num1", num1);
-  //   console.log("num2", num2);
-  //   console.log("operator", operator);
-  //   console.log("--------------------------------");
-  // }, [num1, num2, operator]);
 
   return (
     <>
